@@ -35,9 +35,9 @@
                                 Prefix Name
                             </label>
                             <select id="prefixname" name="prefixname" class="form-select block w-full mt-1 rounded-md shadow-sm">
-                                <option value="Mr" {{ $user->prefixname === 'Mr' ? 'selected' : '' }}>Mr</option>
-                                <option value="Mrs" {{ $user->prefixname === 'Mrs' ? 'selected' : '' }}>Mrs</option>
-                                <option value="Ms" {{ $user->prefixname === 'Ms' ? 'selected' : '' }}>Ms</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
                             </select>
                         </div>
 
