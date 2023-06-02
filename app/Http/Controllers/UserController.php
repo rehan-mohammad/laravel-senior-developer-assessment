@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserSaved;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,8 @@ class UserController extends Controller
         $validatedData['type'] = $validatedData['type'] ?? 'user';
 
         // Create the user
-        User::create($validatedData);
+        $user = User::create($validatedData);
+        event(new UserSaved($user));
 
         // Redirect the user after successful creation
         return redirect()->route('users.create')->with('success', 'User created successfully!');
@@ -75,6 +77,7 @@ class UserController extends Controller
         ]);
 
         $user->update($validatedData);
+        event(new UserSaved($user));
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
