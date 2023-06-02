@@ -22,7 +22,16 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(static function () {
-    Route::resource('users', 'UserController');
+
+    Route::get('users/restore/{user}', 'UserController@restoreTrashed')->name('users.restore');
+    Route::get('users', 'UserController@index')->name('users.index');
+    Route::get('users/create', 'UserController@create')->name('users.create');
+    Route::post('users', 'UserController@store')->name('users.store');
+    Route::get('users/trashed', 'UserController@trashedUsers')->name('users.trashed');
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+    Route::get('users/permadestroy/{user}', 'UserController@permaDestroy')->name('users.permadestroy');
 });
 
 require __DIR__.'/auth.php';
