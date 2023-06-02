@@ -31,8 +31,14 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="prefixname" class="text-gray-600">Prefix Name:</label>
-                            <input type="text" id="prefixname" name="prefixname" class="border border-gray-300 px-3 py-2 rounded-md w-full">
+                            <label for="prefixname" class="block text-gray-700 text-sm font-bold mb-2">
+                                Prefix Name
+                            </label>
+                            <select id="prefixname" name="prefixname" class="form-select block w-full mt-1 rounded-md shadow-sm">
+                                <option value="Mr" {{ $user->prefixname === 'Mr' ? 'selected' : '' }}>Mr</option>
+                                <option value="Mrs" {{ $user->prefixname === 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                                <option value="Ms" {{ $user->prefixname === 'Ms' ? 'selected' : '' }}>Ms</option>
+                            </select>
                         </div>
 
                         <div class="mb-4">
