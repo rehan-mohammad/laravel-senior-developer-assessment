@@ -31,38 +31,66 @@ class SaveUserDetails
 
         // Save full name
         $fullName = $user->firstname . ' ' . $user->middlename . ' ' . $user->lastname;
-        Detail::create([
-            'key' => 'Full name',
-            'value' => $fullName,
-            'type' => 'bio',
-            'user_id' => $user->id,
-        ]);
+
+        $existingFullname = Detail::where('key', 'Full name')->where('user_id', $user->id)->first();
+        if (isset($existingFullname)) {
+            $existingFullname->value = $fullName;
+            $existingFullname->save();
+        } else {
+            Detail::create([
+                'key' => 'Full name',
+                'value' => $fullName,
+                'type' => 'bio',
+                'user_id' => $user->id,
+            ]);
+        }
 
         // Save middle initial
         $middleInitial = strtoupper(substr($user->middlename, 0, 1));
-        Detail::create([
-            'key' => 'Middle Initial',
-            'value' => $middleInitial . '.',
-            'type' => 'bio',
-            'user_id' => $user->id,
-        ]);
+
+        $existingMiddleInitial = Detail::where('key', 'Middle Initial')->where('user_id', $user->id)->first();
+        if (isset($existingMiddleInitial)) {
+            $existingMiddleInitial->value = $middleInitial;
+            $existingMiddleInitial->save();
+        } else {
+            Detail::create([
+                'key' => 'Middle Initial',
+                'value' => $middleInitial . '.',
+                'type' => 'bio',
+                'user_id' => $user->id,
+            ]);
+        }
 
         // Save avatar
         $avatar = $user->photo;
-        Detail::create([
-            'key' => 'Avatar',
-            'value' => $avatar,
-            'type' => 'bio',
-            'user_id' => $user->id,
-        ]);
+
+        $existingAvatar = Detail::where('key', 'Avatar')->where('user_id', $user->id)->first();
+        if (isset($existingAvatar)) {
+            $existingAvatar->value = $avatar;
+            $existingAvatar->save();
+        } else {
+            Detail::create([
+                'key' => 'Avatar',
+                'value' => $avatar,
+                'type' => 'bio',
+                'user_id' => $user->id,
+            ]);
+        }
 
         // Save gender
         $gender = $user->prefixname === 'Mr' ? 'Male' : 'Female';
-        Detail::create([
-            'key' => 'Gender',
-            'value' => $gender,
-            'type' => 'bio',
-            'user_id' => $user->id,
-        ]);
+
+        $existingGender = Detail::where('key', 'Gender')->where('user_id', $user->id)->first();
+        if (isset($existingGender)) {
+            $existingGender->value = $gender;
+            $existingGender->save();
+        } else {
+            Detail::create([
+                'key' => 'Gender',
+                'value' => $gender,
+                'type' => 'bio',
+                'user_id' => $user->id,
+            ]);
+        }
     }
 }
