@@ -29,7 +29,8 @@ Route::middleware('auth')->group(static function () {
     Route::post('users', 'UserController@store')->name('users.store');
     Route::get('users/trashed', 'UserController@trashedUsers')->name('users.trashed');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');// Update User
+    Route::put('users/{user}', 'UserController@update')->name('users.update');
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
     Route::get('users/permadestroy/{user}', 'UserController@permaDestroy')->name('users.permadestroy');
 });

@@ -55,6 +55,30 @@ class UserController extends Controller
         return redirect()->route('users.create')->with('success', 'User created successfully!');
     }
 
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'prefixname' => 'nullable',
+            'firstname' => 'required',
+            'middlename' => 'nullable',
+            'lastname' => 'required',
+            'suffixname' => 'nullable',
+            'photo' => 'nullable',
+            'type' => 'nullable',
+        ]);
+
+        $user->update($validatedData);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+    }
+
     public function destroy(User $user)
     {
         $user->delete();
